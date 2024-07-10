@@ -45,7 +45,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li className="w-full text-center lg:w-auto">
-            <Link to="/train" className="font-semibold transition ease-in-out duration-300 hover:bg-[#439A86] hover:text-white px-3 py-2 rounded block lg:inline-block">
+            <Link to="/things-to-do" className="font-semibold transition ease-in-out duration-300 hover:bg-[#439A86] hover:text-white px-3 py-2 rounded block lg:inline-block">
               Things To Do
             </Link>
           </li>
