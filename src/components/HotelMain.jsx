@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IoIosSearch } from 'react-icons/io';
+// import { IoIosSearch } from 'react-icons/io';
 import { IoPeople } from "react-icons/io5";
 import { IoBed } from "react-icons/io5";
 import { Link } from 'react-router-dom';

@@ -5,6 +5,7 @@ import Train from './pages/Train';
 import Flight from './pages/Flight';
 import Hotel from './pages/Hotel'
 import ThingsToDo from './pages/ThingsToDo';
+import MyTrips from './pages/MyTrips';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/flight" element={<Flight/>}/>
           <Route path="/train" element={<Train/>}/>
           <Route path="/things-to-do" element={<ThingsToDo/>}/>
+          <Route path="/mytrips" element={<MyTrips/>}/>
         </Routes>
        
         

@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { IoSearchSharp } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import train from '/public/thingsToDo.jpg'
+import things from '/public/thingsToDo.jpg'
 
-export default function TrainMain() {
+export default function ThingsMain() {
   const [destination, setDestination] = useState();
   const [data, setData] = useState(null);
 
@@ -27,7 +27,7 @@ export default function TrainMain() {
   return (
     <div className="relative w-full h-screen overflow-hidden">
       <img
-        src={train}
+        src={things}
         className="absolute top-0 left-0 w-full h-3/4 object-cover opacity-90"
       />
       <div className="relative z-10 flex flex-col items-center mt-48 w-full h-full text-[#ffffff]">
