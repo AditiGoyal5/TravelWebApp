@@ -27,7 +27,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="flex flex-col lg:ml-20 lg:flex-row lg:items-center lg:justify-between w-full">
+      <div className="flex flex-col lg:ml-16 xl:ml-16 lg:flex-row lg:items-center lg:justify-between w-full">
         <ul className={`flex-col lg:flex-row lg:flex items-center space-y-4 lg:space-y-0 lg:space-x-4 py-3 px-4 ${hamburgerMenuVisibility ? 'flex justify-center' : 'hidden'} lg:flex w-full lg:w-auto`}>
           <li className="w-full text-center lg:w-auto">
             <Link to="/flight" className="font-semibold transition ease-in-out duration-300 hover:bg-[#439A86] hover:text-white px-3 py-2 rounded block lg:inline-block">
