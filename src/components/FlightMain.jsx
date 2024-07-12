@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { IoPeople } from "react-icons/io5";
 import { IoBed } from "react-icons/io5";
 import { Link } from 'react-router-dom';
+import img from "/public/aeroplane.jpg"
 
 export default function FlightMain() {
   const [dates, setDates] = useState({ startDate: '', endDate: '' });
@@ -19,13 +20,13 @@ export default function FlightMain() {
   return (
     <div className="relative w-full h-screen overflow-hidden">
       <img
-        src="https://www.airport-technology.com/wp-content/uploads/sites/14/2024/03/Shutterstock_2062639517-1024x576.jpg"
+        src={img}
         className="absolute top-0 left-0 w-full h-3/4 object-cover opacity-85"
       />
       <div className="relative z-10 flex flex-col items-center mt-44 w-full h-full text-[#ffffff]">
         <h1 className="text-4xl font-bold mb-4">Smooth Flights, Memorable Journeys.</h1>
         <div className="bg-white p-4 rounded-lg shadow-lg flex items-center space-x-2">
-          <input
+          {/* <input
             type="text"
             placeholder="Hotel name or destination"
             className="px-4 py-2 bg-gray-100 text-gray-800 border-none rounded-lg"
@@ -62,7 +63,7 @@ export default function FlightMain() {
               onChange={(e) => handleGuestChange(e, 'adults')}
               className="w-12 px-2 py-1 bg-gray-100 text-gray-800 border-none rounded-lg"
               min="1"
-            />
+            /> */}
             {/* <input
               type="number"
               value={guests.children}
@@ -71,11 +72,11 @@ export default function FlightMain() {
               min="0"
             /> */}
           </div>
-          <Link to="">
+          {/* <Link to="">
             <button className="px-4 py-2 bg-[#99582a] text-white rounded-lg">Find Hotels</button>
-          </Link>
+          </Link> */}
         </div>
       </div>
-    </div>
+    // </div>
   );
 }

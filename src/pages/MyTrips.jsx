@@ -1,7 +1,6 @@
 import Navbar from "../components/Navbar";
 import Main from "../components/HotelMain";
 import Card from "../components/Cards"
-import Travel from "../components/Travel"
 import Footer from "../components/Footer"
 
 export default function MyTrips() {

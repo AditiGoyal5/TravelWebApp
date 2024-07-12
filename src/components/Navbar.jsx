@@ -9,7 +9,7 @@ export default function Navbar() {
   const [hamburgerMenuVisibility, setHamburgerMenuVisibility] = useState(false);
 
   return (
-    <nav className="flex flex-col lg:flex-row items-center justify-between mx-auto mt-5 py-3 bg-[#ffffff] text-dark px-7 shadow rounded-xl w-[95%] h-auto lg:h-[58px] z-50">
+    <nav className="flex flex-col lg:flex-row fixed top-0 left-1/2 transform -translate-x-1/2 items-center justify-between mx-auto mt-5 py-3 bg-[#ffffff] text-dark px-7 shadow rounded-xl w-[95%] h-auto lg:h-[58px] z-50">
       <div className="flex justify-between w-full lg:w-auto">
         <Link to="/" className="text-3xl font-bold cursor-pointer">Trippy</Link>
         <div className="lg:hidden">
