@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { IoPeople } from "react-icons/io5";
 import { IoBed } from "react-icons/io5";
 import { Link } from 'react-router-dom';
-import train from '/public/train4.jpg'
+// import train from '/public/train4.jpg'
 
 export default function TrainMain() {
   const [dates, setDates] = useState({ startDate: '', endDate: '' });
@@ -20,7 +20,7 @@ export default function TrainMain() {
   return (
     <div className="relative w-full h-screen overflow-hidden">
       <img
-        src={train}
+        // src={train}
         className="absolute top-0 left-0 w-full h-3/4 object-cover opacity-90"
       />
       <div className="relative z-10 flex flex-col items-center mt-48 w-full h-full text-[#ffffff]">

@@ -4,6 +4,7 @@ import { IoClose } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 import { IoIosSearch } from "react-icons/io";
 import { MdFlight } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
 
 export default function Navbar() {
   const [hamburgerMenuVisibility, setHamburgerMenuVisibility] = useState(false);
@@ -64,6 +65,7 @@ export default function Navbar() {
           </li>
           <li className="w-full text-center lg:w-auto">
             <Link to="/profile" className="font-semibold transition ease-in-out duration-300 hover:bg-[#439A86] hover:text-white px-3 py-2 rounded block lg:inline-block">
+            <FaUser className="inline text-2xl pe-2"/>
               Profile
             </Link>
           </li>
