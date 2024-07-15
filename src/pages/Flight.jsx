@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar"
-import FlightMain from "../components/FlightMain"
+import FlightMain from "../components/FlightNavbar"
 export default function Flight(){
 
     return(

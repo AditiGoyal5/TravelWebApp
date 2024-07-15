@@ -2,14 +2,18 @@ import { useState, useRef, useEffect } from 'react';
 import { IoPeople } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
 import img from "/public/aeroplane.jpg";
+import FlightSearch from './FlightSearch';
 
-export default function FlightMain() {
+export default function FlightNavbar() {
   const [dates, setDates] = useState({ startDate: '', endDate: '' });
   const [guests, setGuests] = useState({ adults: 2, seniors: 0, children: 0 });
   const [flightClass, setFlightClass] = useState('Economy');
+  const [starting, setStarting] = useState('');
+  const [destination, setDestination] = useState('');
   const [showGuestDropdown, setShowGuestDropdown] = useState(false);
   const guestDropdownRef = useRef();
   const flightClassRef = useRef();
+  const [showFlightSearch, setShowFlightSearch] = useState(false);
 
   const handleDateChange = (e) => {
     setDates({ ...dates, [e.target.name]: e.target.value });
@@ -40,6 +44,9 @@ export default function FlightMain() {
   const handleFlightClassChange = (e) => {
     setFlightClass(e.target.value);
   };
+  const handleFindFlights = () => {
+    setShowFlightSearch(true);
+  };
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -49,9 +56,10 @@ export default function FlightMain() {
   }, []);
 
   return (
+    <>
     <div className="relative w-full h-screen overflow-hidden">
       <img
-        src={img}
+        src="https://t4.ftcdn.net/jpg/02/44/61/09/240_F_244610919_QsikXnS8sUhOeHqGbbifNx1pzjikzgLG.jpg"
         className="absolute top-0 left-0 w-full h-3/4 object-cover opacity-85"
         alt="background"
       />
@@ -65,7 +73,8 @@ export default function FlightMain() {
                 id="round-trip"
                 name="trip-type"
                 value="round-trip"
-                className="mr-2"
+                className="form-radio mr-2"
+                checked
               />
               <label htmlFor="round-trip" className="mr-4 text-gray-600">Round Trip</label>
               <input
@@ -73,7 +82,7 @@ export default function FlightMain() {
                 id="one-way"
                 name="trip-type"
                 value="one-way"
-                className="mr-2"
+                className="form-radio mr-2 text-[#f4978e]"
               />
               <label htmlFor="one-way" className="mr-4 text-gray-600">One-way</label>
               <input
@@ -81,7 +90,7 @@ export default function FlightMain() {
                 id="multi-city"
                 name="trip-type"
                 value="multi-city"
-                className="mr-2"
+                className="mr-2 form-radio"
               />
               <label htmlFor="multi-city" className='text-gray-600'>Multi-city</label>
             </div>
@@ -93,6 +102,8 @@ export default function FlightMain() {
                 type="text"
                 placeholder="From: Mumbai (BOM)"
                 className="w-full p-2 pl-10 border border-gray-300 rounded-lg text-gray-600"
+                value={starting}
+                onChange={(e) => setStarting(e.target.value)}
               />
             </div>
             <div className="relative w-full">
@@ -101,6 +112,8 @@ export default function FlightMain() {
                 type="text"
                 placeholder="To: Banglore"
                 className="w-full p-2 pl-10 border border-gray-300 rounded-lg text-gray-600"
+                value={destination}
+                onChange={(e) => setDestination(e.target.value)}
               />
             </div>
           </div>
@@ -168,9 +181,12 @@ export default function FlightMain() {
               )}
             </div>
           </div>
-          <button className="bg-[#f4978e] text-white p-2 rounded-lg mt-4 font-semibold tracking-wider">Find Flights</button>
+          <button className="bg-[#f4978e] text-white p-2 rounded-lg mt-4 font-semibold tracking-wider" onClick={handleFindFlights}>Find Flights</button>
         </div>
       </div>
     </div>
+
+    {showFlightSearch && <FlightSearch starting={starting} destination={destination} />}
+    </>
   );
 }

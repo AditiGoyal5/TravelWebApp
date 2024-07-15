@@ -31,3 +31,5 @@ export const hotels =[{img:hotel1 , desc:"JW Marriott Marquis Hotel" , price:"fr
                       {img:hotel3, desc:"Hotel Colline de France" , price:"from $100 per adult" ,path:"/"} , 
                       {img:hotel4 , desc:"West Hollywood" , price:"from $100 per adult" , path:"/"}, 
                      ]
+
+export const airlines = ["IndiGo"  , "Akasa Air" , "Air India" , "AirAsia" , "Vistara" , "SpiceJet"]

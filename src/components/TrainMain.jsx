@@ -20,7 +20,7 @@ export default function TrainMain() {
   return (
     <div className="relative w-full h-screen overflow-hidden">
       <img
-        // src={train}
+        src="https://img.freepik.com/free-photo/people-watching-as-train-approaches_1353-227.jpg?t=st=1721015799~exp=1721019399~hmac=9c644ac995d70cf2f53de1c1e4deddcc995d7a00b7edc3e4ffb7dd749a6cb9f7&w=740"
         className="absolute top-0 left-0 w-full h-3/4 object-cover opacity-90"
       />
       <div className="relative z-10 flex flex-col items-center mt-48 w-full h-full text-[#ffffff]">
