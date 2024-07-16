@@ -3,6 +3,7 @@ import { IoPeople } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
 // import img from "/public/aeroplane.jpg";
 import FlightSearch from './FlightSearch';
+import DummyData from './DummyData';
 
 
 export default function FlightNavbar() {
@@ -186,7 +187,7 @@ export default function FlightNavbar() {
         </div>
       </div>
     </div>
-
+    {!showFlightSearch && <DummyData />}
     {showFlightSearch && <FlightSearch starting={starting} destination={destination} />}
     </>
   );
