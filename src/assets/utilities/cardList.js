@@ -33,3 +33,5 @@ export const hotels =[{img:hotel1 , desc:"JW Marriott Marquis Hotel" , price:"fr
                      ]
 
 export const airlines = ["IndiGo"  , "Akasa Air" , "Air India" , "AirAsia" , "Vistara" , "SpiceJet"]
+export const trainsList = ["Udyan Express"  , "Ltt Cbe Express" , "Dadar Ten Exp" , "Ju Sbc Exp" ]
+export const trainsClassFilters = ["1st Class Ac"  , "2 Tier Ac" , "3 Tier AC" , "Sleeper"]

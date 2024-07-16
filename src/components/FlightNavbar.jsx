@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { IoPeople } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
-import img from "/public/aeroplane.jpg";
+// import img from "/public/aeroplane.jpg";
 import FlightSearch from './FlightSearch';
+
 
 export default function FlightNavbar() {
   const [dates, setDates] = useState({ startDate: '', endDate: '' });

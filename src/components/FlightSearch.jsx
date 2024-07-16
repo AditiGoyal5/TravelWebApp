@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { IoIosArrowRoundForward } from "react-icons/io";
 import axios from 'axios';
 import {airlines} from "../assets/utilities/cardList.js"
+import { Slider } from "@material-tailwind/react";
 
 export default function FlightSearch({ starting, destination }) {
   const [flights, setFlights] = useState([]);
@@ -67,28 +68,20 @@ export default function FlightSearch({ starting, destination }) {
         </div>
         <div className="mb-4">
           <h4 className="text-md font-medium mb-2">Price</h4>
-          <input
-            type="range"
-            min={priceRange[0]}
-            max={priceRange[1]}
-            value={priceRange[1]}
-            className="w-full"
-          />
-          <div className="flex justify-between text-sm">
+          <div className="w-full mb-2">
+            <Slider defaultValue={50} color="vinaceous" />
+          </div>
+          <div className="flex justify-between text-sm mt-5">
             <span>₹{priceRange[0]}</span>
             <span>₹{priceRange[1]}</span>
           </div>
         </div>
         <div>
-          <h4 className="text-md font-medium mb-2">Duration</h4>
-          <input
-            type="range"
-            min={durationRange[0]}
-            max={durationRange[1]}
-            value={durationRange[1]}
-            className="w-3/4"
-          />
-          <div className="flex justify-between text-sm">
+          <h4 className="text-md font-medium">Duration</h4>
+          <div className="w-full mb-2">
+            <Slider defaultValue={50} />
+          </div>
+          <div className="flex justify-between text-sm mt-5">
             <span>{Math.floor(durationRange[0] / 60)}h {durationRange[0] % 60}m</span>
             <span>{Math.floor(durationRange[1] / 60)}h {durationRange[1] % 60}m</span>
           </div>
