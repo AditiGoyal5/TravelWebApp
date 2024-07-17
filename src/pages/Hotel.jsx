@@ -1,8 +1,7 @@
 // src/Hotel.js
 import Navbar from '../components/Navbar';
 import Main2 from '../components/HotelMain';
-import ItemCards from "../components/ItemCards"
-import { hotels } from "../assets/utilities/cardList";
+
 import Footer from "../components/Footer"
 function Hotel() {
 
@@ -12,7 +11,7 @@ function Hotel() {
                 <Navbar />
             </div>
             <Main2/>
-            <ItemCards list={hotels} heading="Travellers' Choice: Top hotels"></ItemCards>
+            
             <Footer></Footer>
        
       </div>

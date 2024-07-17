@@ -2,7 +2,8 @@ import { useState, useRef } from 'react';
 import { IoPeople } from "react-icons/io5";
 import { FaLocationDot, FaTrainSubway } from "react-icons/fa6";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import TrainSearch from './TrainSearch'; // Import the TrainSearch component
+import TrainSearch from './TrainSearch'; 
+import DummyData from './DummyData';
 
 export default function TrainMain() {
   const [starting, setStarting] = useState('');
@@ -137,6 +138,7 @@ export default function TrainMain() {
       </div>
      
     </div>
+    {!searchClicked && <DummyData />}
     {searchClicked && (
           <TrainSearch starting={starting} destination={destination} />
         )}

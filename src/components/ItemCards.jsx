@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function ItemCards({list , heading}) {
     return (
-        <div className="p-11 mx-16 bg-[#ffff] rounded-lg mt-[-100px]"> 
+        <div className="p-11 mx-16 bg-[#ffff] rounded-lg mt-[-150px]"> 
             <h1 className="text-2xl font-semibold mb-4 mt-0"> 
                 {heading}
             </h1>

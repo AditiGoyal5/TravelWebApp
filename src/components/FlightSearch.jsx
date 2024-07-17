@@ -5,11 +5,10 @@ import {airlines} from "../assets/utilities/cardList.js"
 import { Slider } from "@material-tailwind/react";
 
 export default function FlightSearch({ starting, destination }) {
-  const [flights, setFlights] = useState([]);
-  const [airlin, setAirlines] = useState([]);
+  const [flights, setFlights] = useState([]);    
   const [priceRange, setPriceRange] = useState([2800, 72050]);
   const [durationRange, setDurationRange] = useState([75, 1545]);
-  const [selectedAirlines, setSelectedAirlines] = useState([]);
+ 
 
   useEffect(() => {
     const fetchFlights = async () => {
@@ -21,29 +20,10 @@ export default function FlightSearch({ starting, destination }) {
       }
     };
 
-    const fetchAirlines = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/flight/${starting}/${destination}/${airline}`);
-        setAirlines(response.data);
-      } catch (error) {
-        console.error('Error fetching airlines:', error);
-      }
-    };
-
     if (starting && destination) {
       fetchFlights();
     }
-    fetchAirlines();
   }, [starting, destination]);
-
-  const handleAirlineChange = (airlineName) => {
-    const index = selectedAirlines.indexOf(airlineName);
-    if (index === -1) {
-      setSelectedAirlines([...selectedAirlines, airlineName]);
-    } else {
-      setSelectedAirlines(selectedAirlines.filter(name => name !== airlineName));
-    }
-  };
 
   return (
     <div className="flex gap-2 mx-2 mt-[-155px]">
@@ -58,8 +38,6 @@ export default function FlightSearch({ starting, destination }) {
                 <input
                   type="checkbox"
                   className="mr-2"
-                  checked={selectedAirlines.includes(airline)}
-                  onChange={() => handleAirlineChange(airline)}
                 />
                 <span>{airline}</span>
               </li>
