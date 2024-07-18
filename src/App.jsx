@@ -7,6 +7,7 @@ import Hotel from './pages/Hotel'
 import ThingsToDo from './pages/ThingsToDo';
 import MyTrips from './pages/MyTrips';
 import Profile from './pages/Profile';
+import Signup from './pages/Signup'
 import './App.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/things-to-do" element={<ThingsToDo/>}/>
           <Route path="/mytrips" element={<MyTrips/>}/>
           <Route path="/profile" element={<Profile/>}/>
+          <Route path="/signup" element={<Signup/>}/>
         </Routes>
        
         

@@ -5,9 +5,17 @@ import { Link } from 'react-router-dom';
 import { IoIosSearch } from "react-icons/io";
 import { MdFlight } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
+import { PiSignInFill } from "react-icons/pi";
+import { MdAccountCircle } from "react-icons/md";
 
 export default function Navbar() {
   const [hamburgerMenuVisibility, setHamburgerMenuVisibility] = useState(false);
+  const [profileMenuVisibility, setProfileMenuVisibility] = useState(false);
+  function toggleProfileMenuVisibility(){
+
+    setProfileMenuVisibility(!profileMenuVisibility)
+  }
+
 
   return (
     <nav className="flex flex-col lg:flex-row fixed top-0 left-1/2 transform -translate-x-1/2 items-center justify-between mx-auto mt-5 py-3 bg-[#ffffff] text-dark px-7 shadow rounded-xl w-[95%] h-auto lg:h-[58px] z-50">
@@ -63,11 +71,27 @@ export default function Navbar() {
               MyTrips
             </Link>
           </li>
-          <li className="w-full text-center lg:w-auto">
-            <Link to="/profile" className="font-semibold transition ease-in-out duration-300 hover:bg-[#439A86] hover:text-white px-3 py-2 rounded block lg:inline-block">
-            <FaUser className="inline text-2xl pe-2"/>
+          <li
+            className="relative w-full text-center lg:w-auto"
+            onMouseEnter={() => setProfileMenuVisibility(true)}
+          >
+            <div className="font-semibold transition ease-in-out duration-300 hover:bg-[#439A86] hover:text-white px-3 py-2 rounded block lg:inline-block cursor-pointer">
+              <FaUser className="inline text-2xl pe-1"/>
               Profile
-            </Link>
+            </div>
+            {profileMenuVisibility && (
+              <ul className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-44 bg-white border border-gray-200 rounded shadow-lg z-10">
+                <li>
+                  <Link to="/signup" className="block px-4 py-2 text-gray-700 hover:bg-gray-100"><PiSignInFill className='inline mr-2 font-extrabold text-[#000000]'/>Signup/Login</Link>
+                </li>
+                <li>
+                  <Link to="/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-100"><MdAccountCircle className='inline mr-2 font-extrabold'/>Account</Link>
+                </li>
+                  <div className="text-center">
+                    <button className="text-blue-500" onMouseEnter={toggleProfileMenuVisibility}>Close</button>
+                  </div>
+              </ul>
+            )}
           </li>
         </ul>
       </div>

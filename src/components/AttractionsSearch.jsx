@@ -22,7 +22,7 @@ export default function AttractionSearch({destination}){
 
     return(
 
-        <div className='flex flex-col  mt-[-150px] mx-8 p-4 mb-4'>
+        <div className='flex flex-col  mt-[-150px] mx-12 p-4 mb-4'>
             <h1 className='font-bold text-[#000000] text-3xl'>Ways to tour {destination}</h1>
             <p className='mt-2 text-lg'>Book these experiences for a close-up look at {destination}.</p>
             <div className="flex grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
