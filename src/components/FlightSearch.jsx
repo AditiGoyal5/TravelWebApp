@@ -98,7 +98,7 @@ export default function FlightSearch({ starting, destination }) {
                 <span className="text-green-500 font-bold text-lg">₹{flight.price}</span>
                 <p className='mb-2 text-gray-600 text-sm'>per adult</p>
                 <button className="bg-[#f4978e] text-white px-4 py-2 rounded hover:bg-[#DB877F] transition duration-200">
-                  View Deal
+                  Add
                 </button>
               </div>
             </div>

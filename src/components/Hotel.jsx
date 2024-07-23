@@ -83,6 +83,7 @@ function Hotel({destination}) {
                                         <p className='text-[#bc6c25] font-semibold'>{accommodation.address}</p>
                                         <p className='text-[#588157] mt-3'><LuCheck className='inline mr-1'/>Free cancellation till 24hrs before check in</p>
                                         {accommodation.mealIncluded && <p className='text-[#588157]'><LuCheck className='inline mr-1'/>Breakfast included</p>}
+                                        <button className='border mt-4 bg-[#184e77] text-white w-1/2 py-1'>Add</button>
                                     </div>
                                 </div>
                                 <div className='w-1/4'>

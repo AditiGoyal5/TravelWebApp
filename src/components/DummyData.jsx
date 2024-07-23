@@ -11,14 +11,14 @@ export default function DummyData() {
               <CiShoppingTag size={35} color="white" />
             </div>
             <h2 className="text-[#000000] font-semibold mt-4 text-lg">Get the best deals</h2>
-            <p>Compare flight prices from hundreds of airlines and travel sites in one place.</p>
+            <p>Filter for your airlines, flight times, desired price, and more.</p>
           </div>
           <div className="w-1/4 text-center">
             <div className="bg-[#f4978e] p-3.5 rounded-full inline-block">
               <MdContentPasteSearch size={35} color="white" />
             </div>
             <h2 className="text-[#000000] font-semibold mt-4 text-lg">Search without worry</h2>
-            <p>We're completely free to use—no hidden charges or fees on flight prices at all.</p>
+            <p>Filter for your airlines, flight times, desired price, and more.</p>
           </div>
           <div className="w-1/4 text-center">
             <div className="bg-[#f4978e] p-3.5 rounded-full inline-block">
