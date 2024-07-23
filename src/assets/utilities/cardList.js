@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import axios from 'axios';
 import mountain from "/public/mountain.jpg"
 import itlay from "/public/itlay.jpg"
 import paris from "/public/paris.avif"
@@ -37,3 +39,28 @@ export const trainsList = ["Udyan Express"  , "Ltt Cbe Express" , "Dadar Ten Exp
 export const trainsClassFilters = ["1st Class Ac"  , "2 Tier Ac" , "3 Tier AC" , "Sleeper"]
 export const hotelChains = ["Fab Hotels"  , "Oyo Hotels" , "Treebo Hotels" , "The Oberoi", "Taj",  "Airbnb" ,"Hostels"]
 export const ammenities = ["Wifi"  , "Spa" , "Swimming Pool" , "Parking", "Bar",  "Balcony/Terrace"]
+
+export const fetchTripNames = async () => {
+    try {
+        const response = await axios.get('http://localhost:8080/trips/trip-name-id');
+        return response.data;
+    } catch (error) {
+        console.error("There was an error fetching the trip names!", error);
+        return [];
+    }
+};
+
+// Hook to use trip names
+export const useTripNames = () => {
+    const [tripNames, setTripNames] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await fetchTripNames();
+            setTripNames(data);
+        };
+        fetchData();
+    }, []);
+
+    return tripNames;
+};
