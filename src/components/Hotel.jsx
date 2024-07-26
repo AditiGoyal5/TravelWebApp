@@ -5,9 +5,20 @@ import { hotelChains , ammenities } from '../assets/utilities/cardList';
 import img from "/public/luxuryHotel.jpg"
 import { LuCheck } from "react-icons/lu";
 import { FaStar } from "react-icons/fa6";
+import { useTripNames } from "../assets/utilities/cardList.js";
 
 function Hotel({destination}) {
     const [data, setData] = useState(null);
+    const tripNames = useTripNames();
+
+    const handleAddToTrip = async (accommodationId, tripId) => {
+        try {
+          await axios.put(`http://localhost:8080/trips/${tripId}/add-accommodation/${accommodationId}`);
+          alert('Accommodation added to trip successfully!');
+        } catch (error) {
+          console.error('Error adding flight to trip:', error);
+        }
+      };
 
     useEffect(() => {
         axios.get(`http://localhost:8080/accommodation/${destination}`)
@@ -83,7 +94,19 @@ function Hotel({destination}) {
                                         <p className='text-[#bc6c25] font-semibold'>{accommodation.address}</p>
                                         <p className='text-[#588157] mt-3'><LuCheck className='inline mr-1'/>Free cancellation till 24hrs before check in</p>
                                         {accommodation.mealIncluded && <p className='text-[#588157]'><LuCheck className='inline mr-1'/>Breakfast included</p>}
-                                        <button className='border mt-4 bg-[#184e77] text-white w-1/2 py-1'>Add</button>
+                                        <div className="relative group">
+                                            <button className='border mt-4 bg-[#184e77] text-white w-1/2 py-1'>Add to Trip</button>
+                                            <div className="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 z-10 w-48">
+                                                <ul className="list-none p-2 m-0">
+                                                {tripNames.map(trip => (
+                                                    <li key={trip.tripId} className="p-2 hover:bg-gray-100 cursor-pointer" onClick={() => handleAddToTrip(accommodation.accommodationId, trip.tripId)}>
+                                                    {trip.tripName}
+                                                    </li>
+                                                ))}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <div className='w-1/4'>

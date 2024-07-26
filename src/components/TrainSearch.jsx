@@ -3,9 +3,20 @@ import axios from 'axios';
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { Slider } from "@material-tailwind/react";
 import { trainsList , trainsClassFilters } from '../assets/utilities/cardList';
+import { useTripNames } from "../assets/utilities/cardList.js";
 
 const TrainSearch = ({ starting, destination }) => {
   const [trains, setTrains] = useState([]);
+  const tripNames = useTripNames();
+  const handleAddToTrip = async (trainId,  trainClassId,tripId) => {
+    try {
+      await axios.put(`http://localhost:8080/trips/${tripId}/add-train/${trainId}/${trainClassId}`);
+      alert('Train added to trip successfully!');
+    } catch (error) {
+      console.error('Error adding train to trip:', error);
+    }
+  };
+
 
   useEffect(() => {
     const fetchTrains = async () => {
@@ -99,7 +110,7 @@ const TrainSearch = ({ starting, destination }) => {
               </div>
               <div className="flex mt-8 gap-2">
                 {train.trainClasses.map((trainClass, index) => (
-                  <div key={index} className="mb-2 border p-3 h-36 w-1/4 shadow-md cursor-pointer">
+                  <div key={index} className="mb-2 border p-3 h-44 w-1/4 shadow-md cursor-pointer">
                     <div className='flex justify-between items-center'>
                         <span className="text-lg font-bold text-[#000000]">{trainClass.className}</span>
                         <div className="text-[#000000] font-semibold text-lg">₹{trainClass.price}</div>
@@ -107,6 +118,20 @@ const TrainSearch = ({ starting, destination }) => {
                     <p className='text-green-600 text-sm'>AVAILABLE {trainClass.seatsAvailable}</p>
                     <p className='text-gray-600 text-sm mt-3'>Free Cancellation</p>
                     <p className='text-gray-400 text-xs'>Updated 2hrs ago</p>
+                    <div className="relative group mt-3">
+                      <button className="bg-[#f4978e] text-white px-4 py-2 rounded hover:bg-[#DB877F] transition duration-200">
+                        Add to Trip
+                      </button>
+                      <div className="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 z-10 w-48">
+                        <ul className="list-none p-2 m-0">
+                          {tripNames.map(trip => (
+                            <li key={trip.tripId} className="p-2 hover:bg-gray-100 cursor-pointer" onClick={() => handleAddToTrip(train.train_id, trainClass.trainclass_id ,  trip.tripId)}>
+                              {trip.tripName}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>

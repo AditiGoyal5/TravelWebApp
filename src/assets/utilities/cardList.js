@@ -40,7 +40,7 @@ export const trainsClassFilters = ["1st Class Ac"  , "2 Tier Ac" , "3 Tier AC" ,
 export const hotelChains = ["Fab Hotels"  , "Oyo Hotels" , "Treebo Hotels" , "The Oberoi", "Taj",  "Airbnb" ,"Hostels"]
 export const ammenities = ["Wifi"  , "Spa" , "Swimming Pool" , "Parking", "Bar",  "Balcony/Terrace"]
 
-export const fetchTripNames = async () => {
+export const fetchTripNamesAndId = async () => {
     try {
         const response = await axios.get('http://localhost:8080/trips/trip-name-id');
         return response.data;
@@ -56,11 +56,35 @@ export const useTripNames = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await fetchTripNames();
+            const data = await fetchTripNamesAndId();
             setTripNames(data);
         };
         fetchData();
     }, []);
 
     return tripNames;
+};
+
+
+export const fetchAllTrips = async () => {
+    try {
+        const response = await axios.get('http://localhost:8080/trips');
+        return response.data;
+    } catch (error) {
+        console.error("There was an error fetching the trips!", error);
+        return [];
+    }
+};
+export const useAllTrips = () => {
+    const [trips, setTrips] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await fetchAllTrips();
+            setTrips(data);
+        };
+        fetchData();
+    }, []);
+
+    return trips;
 };
