@@ -13,15 +13,27 @@ function Hotel({destination}) {
 
     const handleAddToTrip = async (accommodationId, tripId) => {
         try {
-          await axios.put(`http://localhost:8080/trips/${tripId}/add-accommodation/${accommodationId}`);
-          alert('Accommodation added to trip successfully!');
+          const response = await axios.put(`http://localhost:8080/trips/${tripId}/add-accommodation/${accommodationId}` ,{}, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+          });
+
+
+          if (response.status === 200) {
+            alert('Accommodation added to trip successfully!');
+          }
         } catch (error) {
           console.error('Error adding flight to trip:', error);
         }
       };
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/accommodation/${destination}`)
+        axios.get(`http://localhost:8080/accommodation/${destination}` , {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+          })
             .then(response => {
                 console.log(response.data);
                 setData(response.data);

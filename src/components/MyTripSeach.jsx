@@ -11,7 +11,11 @@ export default function TripSearch({ tripName }) {
       const fetchTrips = async () => {
         setLoading(true);
         try {
-          const response = await axios.get(`http://localhost:8080/trips/${tripName}`);
+          const response = await axios.get(`http://localhost:8080/trips/${tripName}` , {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+          });
           setTrips(response.data);
           console.log(response.data);
           setError(null);

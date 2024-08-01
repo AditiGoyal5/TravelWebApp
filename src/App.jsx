@@ -8,6 +8,7 @@ import ThingsToDo from './pages/ThingsToDo';
 import MyTrips from './pages/MyTrips';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup'
+import Login from './pages/Login'
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/mytrips" element={<MyTrips/>}/>
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/signup" element={<Signup/>}/>
+          <Route path="/login" element={<Login/>}/>
         </Routes>
        
         

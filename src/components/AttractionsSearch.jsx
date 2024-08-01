@@ -10,7 +10,11 @@ export default function AttractionSearch({destination}){
     useEffect(() => {
         const fetchAttractions = async () => {
           try {
-            const response = await axios.get(`http://localhost:8080/attraction/${destination}`);
+            const response = await axios.get(`http://localhost:8080/attraction/${destination}` , {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+              }
+            });
             setAttractions(response.data);
             console.log(response.data);
           } catch (error) {
@@ -23,12 +27,31 @@ export default function AttractionSearch({destination}){
         }
       }, [destination]); 
 
+      // const handleAddToTrip = async (attractionId, tripId) => {
+      //   try {
+      //     await axios.put(`http://localhost:8080/trips/${tripId}/add-attraction/${attractionId}` , {}, {
+      //       headers: {
+      //         Authorization: `Bearer ${localStorage.getItem('token')}`
+      //       }
+      //     });
+      //     alert('Attraction added to trip successfully!');
+      //   } catch (error) {
+      //     console.error('Error adding flight to trip:', error);
+      //   }
+      // };
+
       const handleAddToTrip = async (attractionId, tripId) => {
         try {
-          await axios.put(`http://localhost:8080/trips/${tripId}/add-attraction/${attractionId}`);
-          alert('Flight added to trip successfully!');
+          const response = await axios.put(`http://localhost:8080/trips/${tripId}/add-attraction/${attractionId}`, {}, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+          });
+          if (response.status === 200) {
+            alert('Attraction added to trip successfully!');
+          }
         } catch (error) {
-          console.error('Error adding flight to trip:', error);
+          console.error('Error adding attraction to trip:', error.response ? error.response.data : error.message);
         }
       };
 

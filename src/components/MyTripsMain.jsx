@@ -28,10 +28,10 @@ export default function MyTrips() {
   const [searchTerm, setSearchTerm] = useState("");
   const [showSearchResults, setShowSearchResults] = useState(false); 
   const trips = useAllTrips();
-  const[tripFare , setTripFare] = useState(0);
 
   const handleCreateTripClick = () => {
     setIsModalOpen(true);
+    console.log("open");
   };
 
   const handleCloseModal = () => {
@@ -53,14 +53,26 @@ export default function MyTrips() {
     };
 
     try {
-      const response = await axios.post('http://localhost:8080/trips', tripData);
-      console.log(response.data);
-      // Handle success notification or update the UI here
+      const token = localStorage.getItem('token');
+
+      const response = await axios.post(
+      'http://localhost:8080/trips',
+      tripData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        },
+      }
+    );
+
+    console.log(response.data);
+      
+     
     } catch (error) {
       console.error("There was an error adding the trip!", error);
     }
 
-    setIsModalOpen(false);
+    // setIsModalOpen(false);// setIsModalOpen(false);
     setStep(1);
     setTripName("");
     setTripDescription("");
@@ -85,6 +97,7 @@ export default function MyTrips() {
 
   const handleSearchClick = () => {
     setShowSearchResults(!showSearchResults); 
+    setSearchTerm("");
     
   };
 
@@ -236,15 +249,7 @@ export default function MyTrips() {
                         <p>₹{acc.price_per_night}</p>
                       </div>
                      
-                      {/* <p>
-                        <strong>Type:</strong> {acc.type}
-                      </p> */}
-                      {/* <p>
-                        <strong>Address:</strong> 
-                      </p> */}
-                      {/* <p>
-                        <strong>Meal Included:</strong> {acc.mealIncluded ? "Yes" : "No"}
-                      </p> */}
+                 
                     </div>
                   ))}
                 </div>

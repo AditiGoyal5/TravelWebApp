@@ -42,7 +42,11 @@ export const ammenities = ["Wifi"  , "Spa" , "Swimming Pool" , "Parking", "Bar",
 
 export const fetchTripNamesAndId = async () => {
     try {
-        const response = await axios.get('http://localhost:8080/trips/trip-name-id');
+        const response = await axios.get('http://localhost:8080/trips/trip-name-id' , {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+          });
         return response.data;
     } catch (error) {
         console.error("There was an error fetching the trip names!", error);
@@ -68,7 +72,11 @@ export const useTripNames = () => {
 
 export const fetchAllTrips = async () => {
     try {
-        const response = await axios.get('http://localhost:8080/trips');
+        const response = await axios.get('http://localhost:8080/trips' , {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+          });
         return response.data;
     } catch (error) {
         console.error("There was an error fetching the trips!", error);

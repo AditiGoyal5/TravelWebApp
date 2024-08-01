@@ -10,7 +10,11 @@ const TrainSearch = ({ starting, destination }) => {
   const tripNames = useTripNames();
   const handleAddToTrip = async (trainId,  trainClassId,tripId) => {
     try {
-      await axios.put(`http://localhost:8080/trips/${tripId}/add-train/${trainId}/${trainClassId}`);
+      await axios.put(`http://localhost:8080/trips/${tripId}/add-train/${trainId}/${trainClassId}` ,{}, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
       alert('Train added to trip successfully!');
     } catch (error) {
       console.error('Error adding train to trip:', error);
@@ -21,7 +25,11 @@ const TrainSearch = ({ starting, destination }) => {
   useEffect(() => {
     const fetchTrains = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/train/${starting}/${destination}`);
+        const response = await axios.get(`http://localhost:8080/train/${starting}/${destination}` ,{
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        } );
         setTrains(response.data);
         console.log(response.data);
       } catch (error) {

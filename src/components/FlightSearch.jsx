@@ -14,7 +14,11 @@ export default function FlightSearch({ starting, destination }) {
   useEffect(() => {
     const fetchFlights = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/flight/${starting}/${destination}`);
+        const response = await axios.get(`http://localhost:8080/flight/${starting}/${destination}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        });
         setFlights(response.data);
       } catch (error) {
         console.error('Error fetching flights:', error);
@@ -28,8 +32,15 @@ export default function FlightSearch({ starting, destination }) {
 
   const handleAddToTrip = async (flightId, tripId) => {
     try {
-      await axios.put(`http://localhost:8080/trips/${tripId}/add-flight/${flightId}`);
-      alert('Flight added to trip successfully!');
+      const response = await axios.put(`http://localhost:8080/trips/${tripId}/add-flight/${flightId}` , {}, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      
+      if (response.status === 200) {
+        alert('Flight added to trip successfully!');
+      }
     } catch (error) {
       console.error('Error adding flight to trip:', error);
     }
