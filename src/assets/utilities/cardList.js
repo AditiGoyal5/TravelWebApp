@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
 import mountain from "/public/mountain.jpg"
 import itlay from "/public/itlay.jpg"
@@ -40,9 +41,57 @@ export const trainsClassFilters = ["1st Class Ac"  , "2 Tier Ac" , "3 Tier AC" ,
 export const hotelChains = ["Fab Hotels"  , "Oyo Hotels" , "Treebo Hotels" , "The Oberoi", "Taj",  "Airbnb" ,"Hostels"]
 export const ammenities = ["Wifi"  , "Spa" , "Swimming Pool" , "Parking", "Bar",  "Balcony/Terrace"]
 
+
+const getUsernameFromToken = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        console.log(null);
+      return null; // No token found
+    }
+    
+    try {
+      const decodedToken = jwtDecode(token);
+      console.log(decodedToken);
+      console.log(decodedToken.sub)
+      return decodedToken.sub; 
+    } catch (error) {
+      console.error('Invalid token:', error);
+      return null; // Token decoding failed
+    }
+  };
+
+  export const username = getUsernameFromToken();
+
+  export let user2=null;
+
+  const getUserByUsername = async (username) => {
+    try {
+      const response = await axios.get(`http://localhost:8080/user/${username}` ,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      } );
+      // console.log(response);
+      if (response.status === 200) {
+        user2=response.data;
+        console.log(response.data);
+      }
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      throw error; // Re-throw the error for further handling if needed
+    }
+  };
+
+  // Exporting the userId as a promise
+export const user1 = getUserByUsername(username);
+console.log(user1);
+  
+
+  
 export const fetchTripNamesAndId = async () => {
     try {
-        const response = await axios.get('http://localhost:8080/trips/trip-name-id' , {
+        const response = await axios.get(`http://localhost:8080/trips/trip-name-id/${user2.userId}` , {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`
             }
@@ -72,7 +121,7 @@ export const useTripNames = () => {
 
 export const fetchAllTrips = async () => {
     try {
-        const response = await axios.get('http://localhost:8080/trips' , {
+        const response = await axios.get(`http://localhost:8080/trips/byId/${user2.userId}` , {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`
             }

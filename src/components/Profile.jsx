@@ -8,8 +8,30 @@ import { RiFeedbackFill } from "react-icons/ri";
 import Navbar from "../components/Navbar";
 import illustration from "/public/young-2.jpg";
 import dubai from "/public/dubai.jpg";
+import { jwtDecode } from "jwt-decode";
+
 
 export default function Profile() {
+
+    const getUsernameFromToken = () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.log(null);
+          return null; // No token found
+        }
+      
+        try {
+          const decodedToken = jwtDecode(token);
+          console.log(decodedToken);
+          console.log(decodedToken.sub)
+          return decodedToken.sub; // Adjust this according to your token's structure
+        } catch (error) {
+          console.error('Invalid token:', error);
+          return null; // Token decoding failed
+        }
+      };
+
+      const username = getUsernameFromToken();
     return (
         <div className="flex flex-col w-screen h-screen bg-gray-100">
             <Navbar />
@@ -21,7 +43,7 @@ export default function Profile() {
                     <img src={illustration} alt="Profile" className="w-32 h-32 rounded-full border-4 border-white absolute" style={{ top: '-40px', left: '5' }} />
                     
                     <div className="text-dark ml-40"> {/* Adjust the margin-left to make room for the image */}
-                        <h1 className="text-2xl font-bold ml-40">Candice Wu</h1>
+                        <h1 className="text-2xl font-bold ml-40">{username}</h1>
                         <p className="text-lg ml-40">I'm a Product Designer based in Melbourne, Australia.</p>
                     </div>
                 </div>

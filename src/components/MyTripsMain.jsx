@@ -14,6 +14,7 @@ import { MdHotel } from "react-icons/md";
 import { MdOutlineFlightTakeoff } from "react-icons/md";
 import { VscCircleFilled } from "react-icons/vsc";
 import { MdTrain } from "react-icons/md";
+import {user2} from "../assets/utilities/cardList";
 
 export default function MyTrips() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,19 +30,23 @@ export default function MyTrips() {
   const [showSearchResults, setShowSearchResults] = useState(false); 
   const trips = useAllTrips();
 
-  const handleCreateTripClick = () => {
-    setIsModalOpen(true);
-    console.log("open");
-  };
+  // function handleCreateTripClick(){
+  //   console.log("open");
+  //   setIsModalOpen(true);
+  //   console.log("open");
+    
+  // }
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setStep(1);
   };
 
+  const userId  = user2.userId;
+  console.log(userId);
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const tripData = {
       tripName,
       description,
@@ -49,30 +54,42 @@ export default function MyTrips() {
       endDate,
       destination,
       startPost,
-      numberOfPeople
+      numberOfPeople,
+      userId 
     };
-
+    console.log(tripData);
+  
     try {
       const token = localStorage.getItem('token');
-
-      const response = await axios.post(
-      'http://localhost:8080/trips',
-      tripData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`, 
-        },
+      if (!token) {
+        throw new Error("No token found in localStorage.");
       }
-    );
-
-    console.log(response.data);
-      
-     
+  
+      const response = await axios.post(
+        'http://localhost:8080/trips',
+        tripData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        }
+      );
+  
+      console.log("Trip added successfully:", response.data);
     } catch (error) {
-      console.error("There was an error adding the trip!", error);
+      if (error.response) {
+        console.error("Error response data:", error.response.data);
+        console.error("Error status:", error.response.status);
+        console.error("Error headers:", error.response.headers);
+      } else if (error.request) {
+        console.error("Error request:", error.request);
+      } else {
+        console.error("Error message:", error.message);
+      }
     }
-
-    // setIsModalOpen(false);// setIsModalOpen(false);
+  
+    // Reset form and state
+    setIsModalOpen(false);
     setStep(1);
     setTripName("");
     setTripDescription("");
@@ -82,7 +99,7 @@ export default function MyTrips() {
     setStartPost("");
     setPeople(2);
   };
-
+  
   const nextStep = () => {
     setStep((prevStep) => prevStep + 1);
   };
@@ -102,17 +119,17 @@ export default function MyTrips() {
   };
 
   return (
-    <div className="mx-20 mt-5 mb-2 mt-[-100px]">
-      <div>
-        <div className="flex justify-between mb-5">
-          <h1 className="text-2xl font-bold">My Trips</h1>
-          <button
-            className="bg-blue-500 text-white p-2 rounded"
-            onClick={handleCreateTripClick}
-          >
-            + Create Trip
-          </button>
-        </div>
+    <div className="mx-20 mt-5 mt-10">
+       {/* <div> */}
+      <div className="flex justify-between mb-5">
+        <h1 className="text-2xl font-bold">My Trips</h1>
+        <button
+          className="bg-blue-500 text-white p-2 rounded"
+          onClick={() => setIsModalOpen(true)}
+        >
+          + Create Trip
+        </button>
+      </div>
         <div className="flex justify-between">
           <div>
             <button className="bg-green-600 rounded-xl p-2 text-white">
@@ -290,7 +307,7 @@ export default function MyTrips() {
                 {step === 1 && (
                   <>
                     <div className="mb-4">
-                      <label className="block text-gray-700 font-bold mb-2">
+                      <label className="block text-gray-700 font-bold mb-2" htmlFor="tripName">
                         Trip Name
                       </label>
                       <input
@@ -298,16 +315,19 @@ export default function MyTrips() {
                         className="border rounded-lg w-full p-2"
                         value={tripName}
                         onChange={(e) => setTripName(e.target.value)}
+                        required
+                        name="tripName"
                       />
                     </div>
                     <div className="mb-4">
-                      <label className="block text-gray-700 font-bold mb-2">
+                      <label className="block text-gray-700 font-bold mb-2" htmlFor="description"> 
                         Trip Description
                       </label>
                       <textarea
                         className="border rounded-lg w-full p-2"
                         value={description}
                         onChange={(e) => setTripDescription(e.target.value)}
+                        name="description"
                       ></textarea>
                     </div>
                     <div className="flex justify-end">
@@ -324,7 +344,7 @@ export default function MyTrips() {
                 {step === 2 && (
                   <>
                     <div className="mb-4">
-                      <label className="block text-gray-700 font-bold mb-2">
+                      <label className="block text-gray-700 font-bold mb-2" htmlFor="startPost">
                         Origin
                       </label>
                       <input
@@ -332,10 +352,12 @@ export default function MyTrips() {
                         className="border rounded-lg w-full p-2"
                         value={startPost}
                         onChange={(e) => setStartPost(e.target.value)}
+                        name="startPost"
+                        required
                       />
                     </div>
                     <div className="mb-4">
-                      <label className="block text-gray-700 font-bold mb-2">
+                      <label className="block text-gray-700 font-bold mb-2" htmlFor="destination">
                         Destination
                       </label>
                       <input
@@ -343,6 +365,8 @@ export default function MyTrips() {
                         className="border rounded-lg w-full p-2"
                         value={destination}
                         onChange={(e) => setDestination(e.target.value)}
+                        name="destination"
+                        required
                       />
                     </div>
                     <div className="flex justify-between">
@@ -374,6 +398,7 @@ export default function MyTrips() {
                         className="border rounded-lg w-full p-2"
                         value={startDate}
                         onChange={(e) => setStartDate(e.target.value)}
+                        required
                       />
                     </div>
                     <div className="mb-4">
@@ -385,6 +410,7 @@ export default function MyTrips() {
                         className="border rounded-lg w-full p-2"
                         value={endDate}
                         onChange={(e) => setEndDate(e.target.value)}
+                        required
                       />
                     </div>
                     <div className="mb-4">
@@ -405,6 +431,7 @@ export default function MyTrips() {
                           className="border w-16 text-center"
                           value={numberOfPeople}
                           onChange={(e) => setPeople(Number(e.target.value))}
+                          required
                         />
                         <button
                           type="button"
@@ -436,7 +463,7 @@ export default function MyTrips() {
             </div>
           </div>
         )}
-      </div>
+      {/* </div> */}
     </div>
   );
 }
