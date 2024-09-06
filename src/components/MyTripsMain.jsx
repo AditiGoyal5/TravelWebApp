@@ -4,7 +4,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { IoPeople } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import axios from 'axios';
-import moment from 'moment';
+// import moment from 'moment';
 import TripSearch from "../components/MyTripSeach"; 
 import { useAllTrips } from "../assets/utilities/cardList"
 import img from "/public/trip4.jpg"
