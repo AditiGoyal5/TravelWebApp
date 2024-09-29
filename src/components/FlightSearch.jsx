@@ -49,7 +49,7 @@ export default function FlightSearch({ starting, destination }) {
   return (
     <div className="flex gap-2 mx-2 mt-[-155px]">
       {/* Sidebar */}
-      <div className="w-1/4 p-4 bg-white border-r border-gray-200 rounded-xl">
+      <div className="w-1/4 p-4 bg-white border-r border-gray-200 rounded-xl min-height">
         <h3 className="text-lg font-semibold mb-4">Filters</h3>
         <div className="mb-4">
           <h4 className="text-md font-medium mb-2">Airlines</h4>

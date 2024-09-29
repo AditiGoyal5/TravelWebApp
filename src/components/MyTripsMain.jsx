@@ -3,6 +3,8 @@ import { IoMdSearch } from "react-icons/io";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { IoPeople } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
+import moment from 'moment';
+
 import axios from 'axios';
 // import moment from 'moment';
 import TripSearch from "../components/MyTripSeach"; 
